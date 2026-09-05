@@ -1,0 +1,59 @@
+{
+  "id": "letterF",
+  "name": "Bogstavplænen F",
+  "letter": "F",
+  "word": "fugl",
+  "emoji": "🐦",
+  "station": {
+    "x": 230,
+    "y": 150
+  },
+  "lawn": [
+    [
+      230,
+      110
+    ],
+    [
+      740,
+      110
+    ],
+    [
+      740,
+      215
+    ],
+    [
+      350,
+      215
+    ],
+    [
+      350,
+      280
+    ],
+    [
+      640,
+      280
+    ],
+    [
+      640,
+      385
+    ],
+    [
+      350,
+      385
+    ],
+    [
+      350,
+      520
+    ],
+    [
+      230,
+      520
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

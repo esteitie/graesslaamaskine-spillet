@@ -1,0 +1,51 @@
+{
+  "id": "letterU",
+  "name": "Bogstavplænen U",
+  "letter": "U",
+  "word": "ugle",
+  "emoji": "🦉",
+  "station": {
+    "x": 200,
+    "y": 150
+  },
+  "lawn": [
+    [
+      200,
+      110
+    ],
+    [
+      320,
+      110
+    ],
+    [
+      320,
+      410
+    ],
+    [
+      640,
+      410
+    ],
+    [
+      640,
+      110
+    ],
+    [
+      760,
+      110
+    ],
+    [
+      760,
+      520
+    ],
+    [
+      200,
+      520
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

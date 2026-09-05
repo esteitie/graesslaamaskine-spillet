@@ -1,0 +1,12 @@
+{
+  "id": 4,
+  "name": "Haven med dammen",
+  "station": { "x": 150, "y": 315 },
+  "lawn": [[150,130],[655,130],[655,245],[820,245],[820,500],[150,500]],
+  "islands": [],
+  "hazards": [ { "type": "pond", "shape": "circle", "x": 430, "y": 380, "r": 55 } ],
+  "blocked": [ { "type": "patio", "shape": "rect", "x": 662, "y": 126, "w": 158, "h": 112 } ],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

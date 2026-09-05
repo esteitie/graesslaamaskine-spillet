@@ -1,0 +1,12 @@
+{
+  "id": 2,
+  "name": "Bedstemors have",
+  "station": { "x": 160, "y": 315 },
+  "lawn": [[160,110],[820,110],[820,520],[160,520]],
+  "islands": [ { "type": "flowerbed", "shape": "circle", "x": 490, "y": 315, "r": 70 } ],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": true
+}

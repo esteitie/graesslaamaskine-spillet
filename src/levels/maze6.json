@@ -1,0 +1,98 @@
+{
+  "id": "maze6",
+  "name": "Mesterlabyrinten",
+  "maze": true,
+  "station": {
+    "x": 130,
+    "y": 500
+  },
+  "lawn": [
+    [
+      130,
+      80
+    ],
+    [
+      830,
+      80
+    ],
+    [
+      830,
+      545
+    ],
+    [
+      130,
+      545
+    ]
+  ],
+  "islands": [
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 205,
+      "y": 80,
+      "w": 50,
+      "h": 120
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 205,
+      "y": 350,
+      "w": 50,
+      "h": 195
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 330,
+      "y": 220,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 455,
+      "y": 80,
+      "w": 50,
+      "h": 314
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 455,
+      "y": 544,
+      "w": 50,
+      "h": 1
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 580,
+      "y": 220,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 705,
+      "y": 80,
+      "w": 50,
+      "h": 308
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 705,
+      "y": 538,
+      "w": 50,
+      "h": 7
+    }
+  ],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

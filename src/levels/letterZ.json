@@ -1,0 +1,59 @@
+{
+  "id": "letterZ",
+  "name": "Bogstavplænen Z",
+  "letter": "Z",
+  "word": "zebra",
+  "emoji": "🦓",
+  "station": {
+    "x": 220,
+    "y": 150
+  },
+  "lawn": [
+    [
+      220,
+      110
+    ],
+    [
+      740,
+      110
+    ],
+    [
+      740,
+      215
+    ],
+    [
+      420,
+      415
+    ],
+    [
+      740,
+      415
+    ],
+    [
+      740,
+      520
+    ],
+    [
+      220,
+      520
+    ],
+    [
+      220,
+      415
+    ],
+    [
+      540,
+      215
+    ],
+    [
+      220,
+      215
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

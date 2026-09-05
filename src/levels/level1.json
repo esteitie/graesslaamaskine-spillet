@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "Den lille have",
+  "station": { "x": 200, "y": 305 },
+  "lawn": [[200,140],[760,140],[760,470],[200,470]],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": true
+}

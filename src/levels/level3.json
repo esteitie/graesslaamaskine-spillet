@@ -1,0 +1,12 @@
+{
+  "id": 3,
+  "name": "Bakkehaven",
+  "station": { "x": 150, "y": 420 },
+  "lawn": [[150,120],[820,120],[820,330],[520,330],[520,510],[150,510]],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": { "polygon": [[500,120],[820,120],[820,330],[500,330]], "uphill": [1, 0] },
+  "battery": null,
+  "guideLines": false
+}

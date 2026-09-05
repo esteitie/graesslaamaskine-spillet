@@ -1,0 +1,82 @@
+{
+  "id": "maze4",
+  "name": "Labyrinten med huller",
+  "maze": true,
+  "station": {
+    "x": 130,
+    "y": 500
+  },
+  "lawn": [
+    [
+      130,
+      80
+    ],
+    [
+      830,
+      80
+    ],
+    [
+      830,
+      545
+    ],
+    [
+      130,
+      545
+    ]
+  ],
+  "islands": [
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 230,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 380,
+      "y": 80,
+      "w": 50,
+      "h": 217
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 380,
+      "y": 447,
+      "w": 50,
+      "h": 98
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 530,
+      "y": 80,
+      "w": 50,
+      "h": 314
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 530,
+      "y": 544,
+      "w": 50,
+      "h": 1
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 680,
+      "y": 220,
+      "w": 50,
+      "h": 325
+    }
+  ],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

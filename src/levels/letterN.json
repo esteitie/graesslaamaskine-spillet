@@ -1,0 +1,59 @@
+{
+  "id": "letterN",
+  "name": "Bogstavplænen N",
+  "letter": "N",
+  "word": "næse",
+  "emoji": "👃",
+  "station": {
+    "x": 200,
+    "y": 480
+  },
+  "lawn": [
+    [
+      200,
+      520
+    ],
+    [
+      200,
+      110
+    ],
+    [
+      320,
+      110
+    ],
+    [
+      640,
+      370
+    ],
+    [
+      640,
+      110
+    ],
+    [
+      760,
+      110
+    ],
+    [
+      760,
+      520
+    ],
+    [
+      640,
+      520
+    ],
+    [
+      320,
+      260
+    ],
+    [
+      320,
+      520
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

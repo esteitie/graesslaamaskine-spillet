@@ -1,0 +1,35 @@
+{
+  "id": "letterI",
+  "name": "Bogstavplænen I",
+  "letter": "I",
+  "word": "is",
+  "emoji": "🍦",
+  "station": {
+    "x": 420,
+    "y": 150
+  },
+  "lawn": [
+    [
+      420,
+      110
+    ],
+    [
+      540,
+      110
+    ],
+    [
+      540,
+      520
+    ],
+    [
+      420,
+      520
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

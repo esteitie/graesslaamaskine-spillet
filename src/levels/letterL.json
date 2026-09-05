@@ -1,0 +1,43 @@
+{
+  "id": "letterL",
+  "name": "Bogstavplænen L",
+  "letter": "L",
+  "word": "lastbil",
+  "emoji": "🚚",
+  "station": {
+    "x": 230,
+    "y": 150
+  },
+  "lawn": [
+    [
+      230,
+      110
+    ],
+    [
+      360,
+      110
+    ],
+    [
+      360,
+      420
+    ],
+    [
+      720,
+      420
+    ],
+    [
+      720,
+      520
+    ],
+    [
+      230,
+      520
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

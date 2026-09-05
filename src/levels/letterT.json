@@ -1,0 +1,51 @@
+{
+  "id": "letterT",
+  "name": "Bogstavplænen T",
+  "letter": "T",
+  "word": "traktor",
+  "emoji": "🚜",
+  "station": {
+    "x": 200,
+    "y": 150
+  },
+  "lawn": [
+    [
+      200,
+      110
+    ],
+    [
+      760,
+      110
+    ],
+    [
+      760,
+      220
+    ],
+    [
+      535,
+      220
+    ],
+    [
+      535,
+      520
+    ],
+    [
+      425,
+      520
+    ],
+    [
+      425,
+      220
+    ],
+    [
+      200,
+      220
+    ]
+  ],
+  "islands": [],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

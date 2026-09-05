@@ -1,0 +1,58 @@
+{
+  "id": "maze1",
+  "name": "Den lille labyrint",
+  "maze": true,
+  "station": {
+    "x": 130,
+    "y": 500
+  },
+  "lawn": [
+    [
+      130,
+      80
+    ],
+    [
+      830,
+      80
+    ],
+    [
+      830,
+      545
+    ],
+    [
+      130,
+      545
+    ]
+  ],
+  "islands": [
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 268,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 455,
+      "y": 220,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 642,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    }
+  ],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}

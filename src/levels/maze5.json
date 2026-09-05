@@ -1,0 +1,90 @@
+{
+  "id": "maze5",
+  "name": "Den snørklede labyrint",
+  "maze": true,
+  "station": {
+    "x": 130,
+    "y": 500
+  },
+  "lawn": [
+    [
+      130,
+      80
+    ],
+    [
+      830,
+      80
+    ],
+    [
+      830,
+      545
+    ],
+    [
+      130,
+      545
+    ]
+  ],
+  "islands": [
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 205,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 330,
+      "y": 80,
+      "w": 50,
+      "h": 217
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 330,
+      "y": 447,
+      "w": 50,
+      "h": 98
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 455,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 580,
+      "y": 80,
+      "w": 50,
+      "h": 211
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 580,
+      "y": 441,
+      "w": 50,
+      "h": 104
+    },
+    {
+      "type": "hedge",
+      "shape": "rect",
+      "x": 705,
+      "y": 80,
+      "w": 50,
+      "h": 325
+    }
+  ],
+  "hazards": [],
+  "blocked": [],
+  "hill": null,
+  "battery": null,
+  "guideLines": false
+}
