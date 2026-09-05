@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Græsslåmaskinen">
+<meta name="theme-color" content="#2f7d32">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Byg din egen robotgræsslåmaskine og slå græsset i fem haver.">
+<title>Græsslåmaskine Spillet</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="stage">
+    <canvas id="scene"></canvas>
+    <canvas id="scene3d" hidden></canvas>
+    <div id="ui"></div>
+    <div id="joystick" hidden>
+      <div id="joystick-base"></div>
+      <div id="joystick-thumb"></div>
+    </div>
+  </div>
+
+  <div id="rotate" aria-hidden="true">
+    <svg viewBox="0 0 232 172" width="290" height="215" aria-hidden="true">
+      <g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+        <g opacity=".45">
+          <rect x="20" y="8" width="64" height="106" rx="14"/>
+          <line x1="42" y1="22" x2="62" y2="22"/>
+        </g>
+        <rect x="120" y="30" width="104" height="66" rx="14"/>
+        <line x1="212" y1="52" x2="212" y2="74"/>
+      </g>
+      <g fill="none" stroke="#ffe066" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M54 132 q46 28 100 4"/>
+        <path d="M140 152 l16 -16 -18 -8"/>
+      </g>
+    </svg>
+    <p>Drej din iPad 🙂</p>
+  </div>
+
+  <noscript><p style="color:#fff;font:bold 24px system-ui;padding:24px">Slå JavaScript til for at spille.</p></noscript>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

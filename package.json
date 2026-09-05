@@ -1,0 +1,17 @@
+{
+  "name": "graesslaamaskine-spillet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Browserspil for en 5-arig: byg en robotplaeneklipper og slaa graesset paa fem baner.",
+  "scripts": {
+    "start": "serve . -l 8080",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "icons": "python3 tools/make-icons.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "serve": "^14.2.3"
+  }
+}

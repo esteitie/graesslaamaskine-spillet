@@ -1,0 +1,642 @@
+/* Graesslaamaskine Spillet - alt UI er ikoner og farver, aldrig laesetekst. */
+
+:root {
+  --stage-w: 960px;
+  --stage-h: 600px;
+  /* Knapper: aldrig under 80x80 px (spilplan 2). */
+  --btn: max(80px, calc(var(--stage-w) / 11));
+  --btn-big: max(104px, calc(var(--stage-w) / 8));
+  --radius: 22px;
+  --green: #2f9e44;
+  --green-dark: #1f6f30;
+  --green-light: #74d680;
+  --orange: #f97316;
+  --orange-dark: #c2410c;
+  --sky: #8fd3f4;
+  --panel: #fffaf0;
+  --ink: #3d2b1f;
+  --shadow: 0 6px 0 rgba(0, 0, 0, .18), 0 10px 22px rgba(0, 0, 0, .22);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #12321a;
+  font-family: "Baloo 2", "Comic Sans MS", "Chalkboard SE", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  touch-action: none;
+}
+
+/* ---------------------------------------------------------------- scene */
+
+#stage {
+  position: relative;
+  width: min(100vw, calc(100vh * 1.6));
+  height: min(100vh, calc(100vw / 1.6));
+  width: min(100dvw, calc(100dvh * 1.6));
+  height: min(100dvh, calc(100dvw / 1.6));
+  touch-action: none;
+  overflow: hidden;
+  background: var(--sky);
+  box-shadow: 0 0 60px rgba(0, 0, 0, .5);
+}
+
+#scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/*
+ * Overlayet maa aldrig ligge i vejen for canvasset: kun de elementer man
+ * faktisk kan trykke paa, tager imod pointer-haendelser. (En tidligere regel
+ * "#ui > *" slog .screen ud paa specificitet og daekkede hele spilfladen.)
+ */
+#scene3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+#scene3d[hidden] { display: none; }
+
+#ui,
+.screen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#ui button,
+#ui .veil,
+#ui .panel,
+#ui .tray,
+#ui .options { pointer-events: auto; }
+
+/* ---------------------------------------------------------------- knapper */
+
+.btn {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--btn);
+  height: var(--btn);
+  min-width: 80px;
+  min-height: 80px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+  font-size: calc(var(--btn) * .48);
+  line-height: 1;
+  overflow: hidden;
+}
+
+.btn svg { width: 62%; height: 62%; display: block; }
+.btn[hidden], #joystick[hidden] { display: none; }
+.btn:active { transform: translateY(4px) scale(.96); box-shadow: 0 2px 0 rgba(0,0,0,.18); }
+.btn:focus-visible { outline: 5px solid #fff; outline-offset: 3px; }
+.btn[disabled] { filter: grayscale(.7) brightness(.85); cursor: default; }
+
+.btn.round { border-radius: 50%; }
+.btn.go {
+  width: var(--btn-big);
+  height: var(--btn-big);
+  border-radius: 50%;
+  background: linear-gradient(#5fd46e, var(--green));
+  color: #fff;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.btn.go svg { width: 54%; height: 54%; }
+.btn.warn { background: linear-gradient(#ffd166, #f0a500); }
+/* Havekortets knapper: lys bund, saa den lille have indeni kan ses. */
+.btn.garden { background: linear-gradient(#fffdf7, #ffeec2); color: var(--ink); }
+.btn.go.garden { box-shadow: var(--shadow), 0 0 0 6px rgba(47, 158, 68, .85); }
+.btn.on { background: linear-gradient(#ffe066, #ffc300); }
+.btn.locked { background: #cfd8cf; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.07); }
+}
+
+/* Positionerede knapper er centreret med translate - animationen skal beholde det. */
+@keyframes pulse-pos {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.07); }
+}
+.btn.go.pos { animation-name: pulse-pos; }
+/* spillervaelgeren paa introen skal ikke pulsere - der er to at vaelge imellem */
+.btn.go.garden.round { animation: none; }
+
+@keyframes blink {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.5); }
+}
+
+@keyframes hop {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  40%  { transform: translate(-50%, -62%) scale(1.06); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.pos { transform: translate(-50%, -50%); }
+.pos:active { transform: translate(-50%, -50%) translateY(4px) scale(.96); }
+
+/* ---------------------------------------------------------------- intro */
+
+#intro-title {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: calc(var(--stage-w) * .062);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 5px 0 #1f6f30, 0 10px 20px rgba(0,0,0,.35);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- vaerksted */
+
+.tray {
+  position: absolute;
+  left: 50%;
+  bottom: 2%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: calc(var(--stage-w) * .012);
+  padding: calc(var(--stage-w) * .012);
+  border-radius: calc(var(--radius) + 8px);
+  background: rgba(255, 250, 240, .82);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(3px);
+}
+
+.tray .btn { position: relative; }
+.tray .btn.selected { background: linear-gradient(#ffe066, #ffc300); transform: translateY(-6px); }
+.tray .btn.selected:active { transform: translateY(-2px) scale(.96); }
+
+.options {
+  position: absolute;
+  left: 50%;
+  bottom: calc(2% + var(--btn) + var(--stage-h) * .025);
+  transform: translateX(-50%);
+  display: flex;
+  gap: calc(var(--stage-w) * .012);
+  padding: calc(var(--stage-w) * .012);
+  border-radius: calc(var(--radius) + 8px);
+  background: rgba(255, 250, 240, .92);
+  box-shadow: var(--shadow);
+  max-width: 92%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  animation: slide-in .22s ease-out;
+}
+.options::-webkit-scrollbar { display: none; }
+.options .btn { position: relative; flex: 0 0 auto; }
+.options .btn.selected { outline: 6px solid var(--green); outline-offset: -6px; }
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(24px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* knapraekken i garagen: lift og kameravinkler */
+.garage-tools {
+  position: absolute;
+  left: 68%;
+  bottom: 2.5%;
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--stage-w) * .012);
+}
+
+/* 3D-garagen: kategorier til venstre, dele til hoejre, maskinen i midten */
+.tray.side {
+  left: 1.5%;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: calc(var(--stage-h) * .012);
+  padding: calc(var(--stage-h) * .012);
+}
+.options.side {
+  left: auto;
+  right: 1.5%;
+  top: 16%;
+  bottom: 2.5%;
+  transform: none;
+  flex-direction: column;
+  max-width: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  gap: calc(var(--stage-h) * .012);
+  padding: calc(var(--stage-h) * .012);
+  animation: none;
+}
+.garage-tools .btn { position: relative; }
+.garage-tools .btn.on { background: linear-gradient(#ffe066, #ffc300); }
+
+#machine-stage {
+  position: absolute;
+  left: 50%;
+  top: 33%;
+  height: 38%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 18px 14px rgba(0, 0, 0, .28));
+  pointer-events: none;
+}
+#machine-stage svg { height: 100%; width: auto; display: block; }
+#machine-stage.hop { animation: hop .34s ease-out; }
+
+.name-tag {
+  position: absolute;
+  left: 50%;
+  top: 7%;
+  transform: translate(-50%, -50%);
+  padding: .28em .8em;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  font-size: calc(var(--stage-w) * .034);
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- bane-hud */
+
+.hud {
+  position: absolute;
+  top: 2.2%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, .9);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+.hud .icon { width: calc(var(--stage-w) * .042); height: calc(var(--stage-w) * .042); }
+.bar {
+  position: relative;
+  width: calc(var(--stage-w) * .26);
+  height: calc(var(--stage-w) * .028);
+  min-height: 16px;
+  border-radius: 999px;
+  background: #d8e6d2;
+  overflow: hidden;
+}
+.bar > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(#8ee79b, var(--green));
+  transition: width .18s linear;
+}
+.bar.full { box-shadow: 0 0 0 3px #ffc300, 0 0 14px rgba(255, 195, 0, .7); }
+.bar.full > i { background: linear-gradient(#ffe066, #f0a500); }
+
+/* runder i en skoleopgave: fem prikker der fyldes ud */
+.pips {
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, .9);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+.pips > i {
+  display: block;
+  width: calc(var(--stage-w) * .026);
+  height: calc(var(--stage-w) * .026);
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .16);
+  transition: background .25s ease, transform .25s ease;
+}
+.pips > i.done { background: linear-gradient(#8ee79b, var(--green)); transform: scale(1.15); }
+
+/* trin under hver aktivitet i Skolehaven: hvor langt er man naaet */
+.ladder {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ladder > i {
+  display: block;
+  width: 9px;
+  border-radius: 3px 3px 0 0;
+  background: rgba(255, 255, 255, .5);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
+}
+.ladder > i.on { background: linear-gradient(#ffe066, #f0a500); }
+
+/* ordet efter en bogstavplaene */
+.word-card {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: .4em;
+  padding: .2em .7em;
+  border-radius: 24px;
+  background: rgba(255, 250, 240, .95);
+  box-shadow: var(--shadow);
+  font-size: calc(var(--stage-w) * .07);
+  font-weight: 800;
+  pointer-events: none;
+  animation: hop-in .4s ease-out;
+}
+.word-card b { color: var(--orange-dark); }
+.word-emoji { font-size: 1.1em; }
+@keyframes hop-in {
+  from { opacity: 0; transform: translate(-50%, -30%) scale(.7); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.overview {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: .8;
+  text-align: center;
+  max-width: 34em;
+}
+
+.battery {
+  position: relative;
+  width: calc(var(--stage-w) * .07);
+  height: calc(var(--stage-w) * .032);
+  min-height: 18px;
+  border: 4px solid #4a3b2f;
+  border-radius: 7px;
+  background: #fff;
+  overflow: hidden;
+}
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 40%;
+  border-radius: 0 3px 3px 0;
+  background: #4a3b2f;
+}
+.battery > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  width: 100%;
+  background: linear-gradient(#8ee79b, var(--green));
+  transition: width .2s linear;
+}
+.battery.low > i { background: linear-gradient(#ffb4a2, #e5484d); animation: blink .7s infinite; }
+
+/* ---------------------------------------------------------------- joystick */
+
+#joystick {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+#joystick-base, #joystick-thumb {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+#joystick-base {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, .26);
+  border: 6px solid rgba(255, 255, 255, .6);
+}
+#joystick-thumb {
+  width: 78px;
+  height: 78px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+/* ---------------------------------------------------------------- paneler */
+
+.veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 40, 24, .55);
+  display: grid;
+  place-items: center;
+  animation: fade-in .2s ease-out;
+}
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 26px 34px;
+  border-radius: 30px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.panel .row { display: flex; gap: 16px; }
+.panel .btn { position: relative; }
+
+.hold-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 6px solid var(--green);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+}
+
+.big-title {
+  position: absolute;
+  left: 50%;
+  top: 16%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--stage-w) * .07);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 5px 0 #b8860b, 0 12px 24px rgba(0,0,0,.35);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- portraet */
+
+#rotate {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  align-content: center;
+  gap: 20px;
+  background: #12321a;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  z-index: 99;
+  text-align: center;
+}
+#rotate p { margin: 0; }
+
+@media (orientation: portrait) {
+  #rotate { display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn.go { animation: none; }
+  .options { animation: none; }
+  #machine-stage.hop { animation: none; }
+  .battery.low > i { animation: none; }
+}
+
+/* ---------------------------------------------------------------- Gro, gartneren */
+
+#guide {
+  position: absolute;
+  left: 1.2%;
+  bottom: 0;
+  height: 31%;
+  pointer-events: none;
+  z-index: 6;
+  transition: transform .38s cubic-bezier(.2, .9, .3, 1.2), opacity .3s ease;
+}
+#guide.hidden { transform: translateY(118%); opacity: 0; transition-timing-function: ease-in; }
+#guide.right { left: auto; right: 1.2%; }
+#guide.center { left: 22%; }
+#guide.top { bottom: auto; top: 25%; height: 26%; }
+.guide-figure { height: 100%; aspect-ratio: 200 / 250; }
+.guide-figure svg { height: 100%; width: auto; display: block; overflow: visible; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .3)); }
+#guide.flip .guide-figure svg { transform: scaleX(-1); }
+
+.guide-bubble {
+  position: absolute;
+  left: 82%;
+  bottom: 74%;
+  min-width: calc(var(--stage-w) * .1);
+  min-height: calc(var(--stage-w) * .075);
+  padding: .25em .6em;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--stage-w) * .05);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ink);
+  animation: bubble-in .25s ease-out;
+}
+.guide-bubble::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -12px;
+  border: 12px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+}
+#guide.right .guide-bubble { left: auto; right: 82%; }
+#guide.right .guide-bubble::after { left: auto; right: 14px; }
+.guide-bubble.empty { display: none; }
+.bubble-letter { color: var(--orange-dark); font-size: 1.25em; }
+.bubble-sum { color: var(--green-dark); }
+.bubble-emoji { font-size: 1.1em; }
+.bubble-svg svg { width: 1.15em; height: 1.15em; display: block; }
+.bubble-dots { color: #c88a00; font-size: .55em; letter-spacing: .08em; }
+@keyframes bubble-in { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* hun aander, blinker og taler */
+.gro-body { transform-box: view-box; transform-origin: 100px 240px; animation: gro-bob 3.4s ease-in-out infinite; }
+@keyframes gro-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.gro-eyes { transform-box: view-box; transform-origin: 100px 86px; animation: gro-blink 4.6s infinite; }
+@keyframes gro-blink { 0%, 91%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+.gro-mouth { transform-box: view-box; transform-origin: 100px 108px; }
+#guide.talk .gro-mouth { animation: gro-talk .26s ease-in-out infinite alternate; }
+@keyframes gro-talk { from { transform: scaleY(.45); } to { transform: scaleY(1.35); } }
+.gro-arm { transform-box: view-box; transform-origin: 136px 156px; transition: transform .3s ease; }
+#guide.point .gro-arm { transform: rotate(-42deg); }
+#guide.cheer .gro-arm { animation: gro-cheer .45s ease-in-out infinite alternate; }
+@keyframes gro-cheer { from { transform: rotate(-75deg); } to { transform: rotate(-105deg); } }
+#guide.cheer .gro-body { animation: gro-jump .4s ease-in-out infinite alternate; }
+@keyframes gro-jump { from { transform: translateY(0); } to { transform: translateY(-16px); } }
+
+/* bogstavet staar stort over plaenen, naar en bogstavbane starter */
+.big-letter {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--stage-h) * .55);
+  font-weight: 800;
+  color: rgba(255, 255, 255, .92);
+  text-shadow: 0 6px 0 var(--orange-dark), 0 14px 30px rgba(0, 0, 0, .35);
+  pointer-events: none;
+  animation: letter-fade 4.2s ease-in forwards;
+}
+@keyframes letter-fade {
+  0% { opacity: 0; transform: translate(-50%, -40%) scale(.7); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -58%) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gro-body, .gro-eyes, #guide.talk .gro-mouth, #guide.cheer .gro-arm, #guide.cheer .gro-body { animation: none; }
+  #guide { transition: none; }
+}
